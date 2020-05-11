@@ -22,7 +22,6 @@ public class Mascota {
     }
     
     public Mascota() {
-        
     }
     
     public Mascota(String nombre, int edad) {

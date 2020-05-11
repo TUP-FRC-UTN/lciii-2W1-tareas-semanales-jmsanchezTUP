@@ -1,11 +1,12 @@
 package veterinaria;
+import java.util.Scanner;
 
 public class Cliente {
     
     private int numero = 0;
     private String nombre = "";
     private int antiguedad = 0;
-    Mascota mascota = new Mascota();
+    private Mascota[] mascotas; //puntero a arreglo de Mascota
 
     public int getNumero() {
         return numero;
@@ -31,29 +32,50 @@ public class Cliente {
         this.antiguedad = antiguedad;
     }
 
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
+    public Cliente(int cantMascota) {
+        mascotas = new Mascota[cantMascota]; //??
     }
     
-    public Cliente() {
-    }
-    
-    public Cliente(int numero, String nombre, int antiguedad, Mascota mascota ) {
+    public Cliente(int numero, String nombre, int antiguedad, int cantMascota) {
+        
         this.numero = numero;
         this.nombre = nombre;
         this.antiguedad = antiguedad;
-        this.mascota = mascota;
+        mascotas = new Mascota[cantMascota]; //arreglo de n Mascota
+    }
+    
+    public void agregarMascota(String nomMascota, int edadMascota) {
+        
+        for (int i = 0; i < mascotas.length; i++) {
+            
+            if (mascotas[i] == null) {
+                
+                mascotas[i] = new Mascota(nomMascota, edadMascota);
+                break;
+            }  
+        }
+    }
+    
+    public String mostrarMascota() {
+        
+        String nomMascota = "";
+        int edMascota = 0;
+        
+        for (Mascota m : mascotas ) {
+            
+            if (m != null) {
+                
+                nomMascota = m.getNombre();
+                edMascota = m.getEdad();
+            }
+        }
+        
+        return "Nombre mascota: "+ nomMascota + ", Edad mascota: " + edMascota;
     }
     
     @Override public String toString() {
         
-        return "Cliente: " + nombre + ", numero: " + numero + ", " + 
-                    mascota.toString();
+        return "Cliente: " + nombre + ", Numero cliente: " + numero + ", " + 
+                    mostrarMascota();
     }
-    
-    
 }

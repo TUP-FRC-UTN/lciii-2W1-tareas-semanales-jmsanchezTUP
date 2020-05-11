@@ -1,27 +1,27 @@
 package veterinaria;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Veterinaria {
 
     public static void main(String[] args) {
-        
-        int n = 0;
+    
+        int n = 0; //cantidad de clientes a crear
         Scanner sc = new Scanner(System.in);
         
-        int sumaEdadMascota = 0;
+        int acumEdadMascota = 0;
         double promEdadMascota = 0;
         int contClientesMasCinco = 0;
-        
+       
         System.out.print("Ingrese cantidad de clientes a cargar: ");
         n = sc.nextInt();
         
         Cliente clientes[] = new Cliente[n];
         
+        int cantMascota = 1;
+        
         for (int i = 0; i < clientes.length; i++) {
             
-            clientes[i] = new Cliente();
+            clientes[i] = new Cliente(cantMascota);
             
             System.out.print("Ingrese numero de cliente: ");
             clientes[i].setNumero(sc.nextInt());
@@ -39,20 +39,21 @@ public class Veterinaria {
             }
             
             System.out.print("Ingrese nombre de mascota: ");
-            clientes[i].mascota.setNombre(sc.nextLine());
+            String nomM = sc.nextLine();
             
-            System.out.println("Ingrese edad de la mascota: ");
-            clientes[i].mascota.setEdad(sc.nextInt());
+            System.out.print("Ingrese edad de la mascota: ");
+            int edadM = sc.nextInt();
+            acumEdadMascota += edadM;
             
-            sumaEdadMascota+=clientes[i].mascota.getEdad();
+            clientes[i].agregarMascota(nomM, edadM);
             
-            System.out.println(clientes[i].toString());
+            System.out.println(clientes[i].toString()); 
         }
         
-        System.out.print("Cantidad de clientes: " + clientes.length);
+        System.out.println("Cantidad de clientes: " + clientes.length);
         
-        promEdadMascota = (double)sumaEdadMascota / clientes.length;
-        System.out.print("El promedio de edades de las mascotas: " + 
+        promEdadMascota = (double)acumEdadMascota / clientes.length;
+        System.out.println("El promedio de edades de las mascotas: " + 
                             promEdadMascota);
         
         System.out.println("Cantidad de clientes con 5 o mas años de " +
