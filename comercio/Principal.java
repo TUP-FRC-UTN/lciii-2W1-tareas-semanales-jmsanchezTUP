@@ -1,7 +1,7 @@
 package comercio;
 import java.util.Scanner;
 
-public class Comercio {
+public class Principal {
 
     public static void main(String[] args) {
        
